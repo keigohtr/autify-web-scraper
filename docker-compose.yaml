@@ -1,0 +1,11 @@
+version: '3.4'
+services:
+  app:
+    container_name: autify-web-scraper
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: development
+    command: bash -c +e "ls"
+    volumes:
+     - .:/app
