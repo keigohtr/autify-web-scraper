@@ -11,4 +11,4 @@ fmt:
 	poetry run isort -rc -m 3 .
 
 test:
-	poetry run pytest -v tests/
+	poetry run pytest -v --cov=autifycli tests/

@@ -18,10 +18,13 @@ def url2filepath(url: str) -> Path:
         Path: File to save
     """
     parsed_url = urlparse(url)
+
+    if not parsed_url.netloc:
+        raise UnsupportedUrlTypeException('Invalid URL.')
+    # TODO: Support both following cases.
     if "/" in parsed_url.path:
         raise UnsupportedUrlTypeException('We don\'t support "/" containing URL yet.')
     if parsed_url.query:
-        raise UnsupportedUrlTypeException("We don't support query parameter containing URL yet.")
+        raise UnsupportedUrlTypeException('We don\'t support query parameter containing URL yet.')
 
-    # TODO: Support both above cases.
-    return Path(parsed_url.netloc)
+    return Path(f'{parsed_url.netloc}.html')

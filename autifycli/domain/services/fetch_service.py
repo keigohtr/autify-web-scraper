@@ -29,7 +29,7 @@ def _fetch_page_process(url: str, metadata: bool) -> None:
         if html.status_code >= 500:
             raise InternalServerErrorException()
 
-        soup = BeautifulSoup(html.content, "html.parser")
+        soup = BeautifulSoup(html.text, "html.parser")
 
         filepath = url2filepath(url)
         with open(filepath, "w") as wf:

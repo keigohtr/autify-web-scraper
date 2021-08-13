@@ -24,12 +24,7 @@ def main(ctx: click.Context) -> None:
 @click.option("-p", "--numof-process", "numof_process", help="Number of processes.", type=int, default=1)
 @click.argument("urls", nargs=-1, required=True)
 def fetch(metadata: bool, numof_process: int, urls: List[str]) -> None:
-    """Fetch web pages
-
-    Args:
-        metadata (bool): flag for whether to display metadata; site, num_links, num_images, last_fetch.
-        urls (List[str]): URLs to fetch.
-    """
+    """Fetch web pages"""
     fetch_pages(metadata, numof_process, set(urls))
 
 
