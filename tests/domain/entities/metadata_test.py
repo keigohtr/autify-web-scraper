@@ -1,13 +1,13 @@
-import freezegun
 from datetime import datetime, timedelta, timezone
 
-from autifycli.domain.entities.metadata import Metadata
+import freezegun
 
+from autifycli.domain.entities.metadata import Metadata
 
 JST = timezone(timedelta(hours=+9), "JST")
 
 
-@freezegun.freeze_time('2021-08-12')
+@freezegun.freeze_time("2021-08-12")
 def test_metadata():
     site = "https://example.com"
     num_links = 0

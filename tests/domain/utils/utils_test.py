@@ -1,7 +1,7 @@
-from autifycli.exceptions import UnsupportedUrlTypeException
-from autifycli.domain.utils import url2filepath
-
 import pytest
+
+from autifycli.domain.utils import url2filepath
+from autifycli.exceptions import UnsupportedUrlTypeException
 
 
 def test_url2filepath_happycase():
@@ -14,7 +14,7 @@ def test_url2filepath_invalid_url():
     url = "example.com"
     with pytest.raises(UnsupportedUrlTypeException) as e:
         url2filepath(url)
-        assert 'Invalid URL.' == str(e)
+        assert "Invalid URL." == str(e)
 
 
 def test_url2filepath_slash_included():
@@ -33,4 +33,4 @@ def test_url2filepath_query_included():
     url = "https://example.com/hoge?a=b&b=c"
     with pytest.raises(UnsupportedUrlTypeException) as e:
         url2filepath(url)
-        assert 'We don\'t support query parameter containing URL yet.' == str(e)
+        assert "We don't support query parameter containing URL yet." == str(e)
