@@ -7,6 +7,7 @@ from typing import List
 
 import autifycli.version
 from autifycli.logger import get_logger
+from autifycli.domain.services.fetch_service import fetch_pages
 
 
 __version__ = autifycli.version.VERSION
@@ -21,20 +22,17 @@ def main(ctx):
 
 
 @main.command(name='fetch', short_help='fetch web pages')
-@click.option('--metadata', 'metadata', help="Display metadata of url", is_flag=True)
+@click.option('--metadata', 'metadata', help='Display metadata of url', is_flag=True)
+@click.option('-p', '--numof-process', 'numof_process', help='Number of processes.', type=int, default=1)
 @click.argument('urls', nargs=-1, required=True)
-def fetch(metadata: bool, urls: List[str]):
+def fetch(metadata: bool, numof_process: int, urls: List[str]):
     """Fetch web pages
 
     Args:
         metadata (bool): flag for whether to display metadata; site, num_links, num_images, last_fetch.
         urls (List[str]): URLs to fetch.
     """
-    click.echo (metadata)
-    for url in urls:
-        click.echo (url)
-
-    click.echo("Done")
+    fetch_pages(metadata, numof_process, set(urls))
 
 
 if __name__ == '__main__':
