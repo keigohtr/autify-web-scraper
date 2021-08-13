@@ -5,30 +5,24 @@ Keigo Hattori
 import logging
 
 
-def get_logger():
+def get_logger() -> logging.Logger:
     """
     Return a logger to output to stderr and logging file
 
     :return: (Logger) Logger.
     """
-    # Initialize if this function is called at first.
-    if not get_logger.initialized:
-        logger = logging.getLogger("autifycli")
-        logger.setLevel(logging.DEBUG)
+    logger = logging.getLogger("autifycli")
+    logger.setLevel(logging.DEBUG)
 
-        # stderr
-        echo = logging.StreamHandler()
-        echo.setLevel(logging.ERROR)
-        echo.setFormatter(logging.Formatter(
-            "%(asctime)s %(levelname)8s %(message)s"))
+    # stderr
+    echo = logging.StreamHandler()
+    echo.setLevel(logging.ERROR)
+    echo.setFormatter(logging.Formatter("%(asctime)s %(levelname)8s %(message)s"))
 
-        logger.addHandler(echo)
-
-        # Finish initialize.
-        get_logger.initialized = True
+    logger.addHandler(echo)
 
     # Return existent logger if it has been already created.
     return logging.getLogger("autifycli")
 
 
-get_logger.initialized = False
+logger = get_logger()

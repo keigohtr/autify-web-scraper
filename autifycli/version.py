@@ -1,3 +1,3 @@
 import pkg_resources
 
-VERSION = pkg_resources.get_distribution('autifycli').version
+VERSION = pkg_resources.get_distribution("autifycli").version

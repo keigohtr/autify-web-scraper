@@ -2,28 +2,25 @@
 Autify Web Scraper
 Keigo Hattori
 """
-from autifycli.domain.entities.metadata import Metadata
 import time
 from multiprocessing import Pool
 from typing import Set
 
 import requests
 from bs4 import BeautifulSoup
-from requests.exceptions import MissingSchema
+from requests.exceptions import ConnectionError, MissingSchema
 from retrying import retry
-from requests.exceptions import ConnectionError
 
-from autifycli.exceptions import InternalServerErrorException, ClientErrorException, UnsupportedUrlTypeException
-from autifycli.logger import get_logger
+from autifycli.domain.entities.metadata import Metadata
 from autifycli.domain.utils import url2filepath
-
+from autifycli.exceptions import ClientErrorException, InternalServerErrorException, UnsupportedUrlTypeException
+from autifycli.logger import logger
 
 FETCH_RETRY_ATTEMPT_NUMBER = 3
 
 
 @retry(stop_max_attempt_number=FETCH_RETRY_ATTEMPT_NUMBER)
 def _fetch_page_process(url: str, metadata: bool) -> None:
-    logger = get_logger()
     try:
         meta = Metadata(site=url)
         html = requests.get(url)
@@ -39,8 +36,8 @@ def _fetch_page_process(url: str, metadata: bool) -> None:
             wf.write(str(soup))
 
         if metadata:
-            meta.num_links = len(soup.find_all('a', href=True))
-            meta.num_images = len(soup.find_all('img'))
+            meta.num_links = len(soup.find_all("a", href=True))
+            meta.num_images = len(soup.find_all("img"))
             print(meta)
     except InternalServerErrorException as e:
         # Retry

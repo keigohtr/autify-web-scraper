@@ -5,17 +5,14 @@ Keigo Hattori
 import json
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
-from logging import lastResort
-from typing import Dict
 
-
-JST = timezone(timedelta(hours=+9), 'JST')
+JST = timezone(timedelta(hours=+9), "JST")
 
 
 @dataclass
 class Metadata:
-    """Metadata
-    """
+    """Metadata"""
+
     site: str
     num_links: int = 0
     num_images: int = 0

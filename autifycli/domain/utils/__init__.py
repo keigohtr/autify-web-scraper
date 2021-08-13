@@ -3,7 +3,6 @@ Autify Web Scraper
 Keigo Hattori
 """
 from pathlib import Path
-from urllib import parse
 from urllib.parse import urlparse
 
 from autifycli.exceptions import UnsupportedUrlTypeException
@@ -20,7 +19,7 @@ def url2filepath(url: str) -> Path:
     """
     parsed_url = urlparse(url)
     if "/" in parsed_url.path:
-        raise UnsupportedUrlTypeException("We don't support \"/\" containing URL yet.")
+        raise UnsupportedUrlTypeException('We don\'t support "/" containing URL yet.')
     if parsed_url.query:
         raise UnsupportedUrlTypeException("We don't support query parameter containing URL yet.")
 
